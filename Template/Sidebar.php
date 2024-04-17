@@ -45,7 +45,7 @@
             <a href="Prodi.php" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Data Prodi
+                Data Program Studi
               </p>
             </a>
           </li>

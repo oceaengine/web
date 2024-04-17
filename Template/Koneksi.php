@@ -1,6 +1,6 @@
 <?php
 
-$servername = "localhost";
+  $servername = "localhost";
   $database = "poliban";
   $username = "root";
   $password = "";
