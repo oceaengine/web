@@ -1,8 +1,11 @@
   <?php
+  session_start();  
+  include 'Template/Koneksi.php';  
+  ceklogin();
   include 'Template/Header.php';
   include 'Template/Sidebar.php';
-  include 'Template/Koneksi.php';  
 
+  
   $query = "SELECT * FROM prodi";
   $hasil = mysqli_query($conn, $query);
 
@@ -47,8 +50,10 @@
                 <h3 class="card-title">Data Program Studi</h3>
 
                 <div class="card-tools">
+                <?php if ($_SESSION['hakakses'] == 'admin') { ?>
                 <td><a href="tambahprodi.php" class="btn btn-primary">Tambah</a>
-                </div>
+                <?php } ?>
+              </div>
 
                   </div>
                 </div>
@@ -72,6 +77,7 @@
                       <tr>
                       <td><?php echo $i++ ?></td>
                       <td><?= $d['Nama_prodi'] ?></td>
+                      
                       <td><a href="editprodi.php?Id_prodi=<?= $d['Id_prodi'] ?>" class="btn btn-warning">Edit</a>
                         <a href="hapusprodi.php?Id_prodi=<?= $d['Id_prodi'] ?>" class="btn btn-danger">Hapus</a>
                     </td>

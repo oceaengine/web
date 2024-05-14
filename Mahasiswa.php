@@ -1,9 +1,14 @@
   <?php
+  session_start(); 
+  include 'Template/Koneksi.php';  
+  ceklogin();
+  cekadmin();
+  
   include 'Template/Header.php';
   include 'Template/Sidebar.php';
-  include 'Template/Koneksi.php';  
+ 
 
-  $query = "SELECT * FROM Mahasiswa JOIN Prodi ON Mahasiswa.id_prodi = Prodi.id_prodi";
+  $query = "SELECT * FROM mahasiswa JOIN Prodi ON mahasiswa.Id_prodi = prodi.Id_prodi";
   $hasil = mysqli_query($conn, $query);
 
   $data = [];
@@ -28,7 +33,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
@@ -82,8 +87,8 @@
                       <td><?php echo $d['Nama_prodi'] ?></td>
                       <td><?php echo $d['Nomor_HP'] ?></td>
                       <td><?php echo $d['Alamat'] ?></td>
-                      <td> <img src="dist/img/<?php echo $d['Foto'] ?>" width="100px"
-                                                    height="100px" /> </td>
+                      <td> <img style="object-fit: cover;" src="dist/img/<?php echo $d['Foto'] ?>"
+                                                    width="100px" height="100px" /> </td>
                       <td> <a href="editmahasiswa.php?NIM=<?php echo $d['NIM'] ?>"
                       class="btn btn-warning">Edit</a>
                       <a href="hapusmahasiswa.php?NIM=<?php echo $d['NIM'] ?>"

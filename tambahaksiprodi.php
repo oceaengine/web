@@ -1,5 +1,7 @@
 <?php
+session_start();
 include 'Template/Koneksi.php';  
+ceklogin(); 
 
 $prodi = $_POST['namaprodi'];
 

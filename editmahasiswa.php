@@ -13,8 +13,10 @@
   $queryProdi = "SELECT * FROM prodi";
   $hasilProdi = mysqli_query($conn, $queryProdi);
   
-  $data = [];
-  while ($baris = mysqli_fetch_assoc($hasilProdi)) 
+  $dataProdi = [];
+  while ($baris = mysqli_fetch_assoc($hasilProdi)) {
+    $dataProdi[] = $baris;
+  }
   
   ?>
   </aside>
@@ -54,11 +56,11 @@
               <!-- form start -->
               <form action="editaksimahasiswa.php" method="post" enctype="multipart/form-data">
                 <input type='hidden' name='nimlama' id='nimlama' value="<?php echo $NIM ?>" />
-                <input type='hidden' name='fotolama' id='fotolama' value="<?php echo $d['Foto'] ?>" />
+                <input type='hidden' name='fotolama' id='fotolama' value="<?php echo $data['Foto'] ?>" />
                 <div class="card-body">
                   <div class="form-group">
                     <label for="NIM">NIM</label>
-                    <input type="text" name="NIM" class="form-control" id="NIM" value="<?php echo $data['NIM'] ?>">
+                    <input type="text" name="NIM" class="form-control" id="NIM" value="<?php echo $data['NIM'] ?>" readonly>
                   </div>
                   <div class="form-group">
                     <label for="Nama">Nama Mahasiswa</label>
@@ -66,19 +68,20 @@
                       value="<?php echo $data['Nama'] ?>">
                   </div>
                   <div class="form-group">
-                    <label for="Nama_prodi">Prodi</label>
+                    <label for="Nama_prodi">Program Studi</label>
                     <select name="Nama_prodi" id="Nama_prodi" class="form-control">
+                    <?php 
+                    foreach ($dataProdi as $prodi) {
+                    ?>
+                     <option id="<?php echo $prodi['Id_prodi']; ?>" value="<?php echo $prodi['Id_prodi']; ?>"
+                        <?= ($prodi['Id_prodi'] == $data['Id_prodi']) ? "SELECTED" : "" ?>   <?= $prodi['Nama_prodi'] ?>>
+                        <?php echo $prodi['Nama_prodi'] ?>
+                      </option>
                       <?php
-                      foreach ($d as $prodi) {
-                        ?>
-                        <option id="<?php echo $prodi['Nama_prodi'] ?>" value="<?php echo $prodi['Id_prodi'] ?>">
-                          <?php echo $prodi['Nama_prodi'] ?>
-                        </option>
-                        <?php
-                      }
-                      ?>
+                    }
+                    ?>
                     </select>
-                  </div>
+                    </div>
                   <div class="form-group">
                     <label for="Nomor_HP">Nomor HP</label>
                     <input type="text" name="Nomor_HP" class="form-control" id="Nomor_HP"
@@ -90,10 +93,13 @@
                       value="<?php echo $data['Alamat'] ?>">
                   </div>
                   <div class="form-group">
-                    <label for="Foto">Foto</label><br>
-                    <input type="file" id="Foto" name="Foto" accept="image/*">
+                  <label for="Foto">Foto</label><br>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="Foto" name="Foto">
+                    <label class="custom-file-label" for="Foto"><?php echo $data['Foto'] ?></label>
                   </div>
                 </div>
+              </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
@@ -101,23 +107,23 @@
               </form>
             </div>
             <!-- /.card -->
-            </div>
+          </div>
           <!--/.col (left) -->
           <!-- right column -->
           <div class="col-md-6">
-
+  
           </div>
           <!--/.col (right) -->
         </div>
-            <!-- /.card -->
-          </div>
-        </div>
         <!-- /.row -->
         <!-- Main row -->
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
+    <!-- right col -->
+  </div>
+  <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
   </div>
 
   <?php

@@ -1,8 +1,10 @@
 <?php
+  session_start();
   include 'Template/Header.php';
   include 'Template/Sidebar.php';
   include 'Template/Koneksi.php';  
-
+  ceklogin();
+  
     $query = "SELECT * FROM prodi";
     $hasil = mysqli_query($conn, $query);
 
@@ -27,7 +29,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
             <li class="breadcrumb-item active">Data Mahasiswa</li>
           </ol>
         </div><!-- /.col -->
@@ -63,15 +65,14 @@
                 </div>
                 <div class="form-group">
                   <label for="Nama_prodi">Program Studi</label>
-                  <select name="Nama_prodi" id="Nama_prodi" class="form-control">
+                  <select name="Nama_prodi" id="Nama_prodi" class="form-control select2bs4" style="width: 100%;">
+                  <option value="">Pilih Program Studi</option> 
                     <?php
-                    foreach ($data as $d) {
+                    foreach ($data as $d):
                       ?>
-                      <option id="<?php echo $d['Nama_prodi'] ?>" value="<?php echo $d['Id_prodi'] ?>">
-                        <?php echo $d['Nama_prodi'] ?>
-                      </option>
+                      <option value="<?php echo $d['Id_prodi'] ?>"><?php echo $d['Nama_prodi']; ?></option>
                       <?php
-                    }
+                    endforeach;
                     ?>
                   </select>
                 </div>
@@ -85,9 +86,15 @@
                 </div>
                 <div class="form-group">
                   <label for="Foto">Foto</label><br>
-                  <input type="file" name="Foto" id="Foto" accept="image/*">
-                </div>
-              </div>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="Foto" name="Foto">
+                      <label class="custom-file-label" for="Foto">Pilih Foto</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
             <!-- /.card-body -->
             <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>

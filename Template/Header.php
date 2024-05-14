@@ -36,11 +36,13 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      <?php if ($_SESSION['hakakses'] == 'admin') { ?>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="Mahasiswa.php" class="nav-link">Data Mahasiswa</a>
       </li>
+      <?php } ?>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="Prodi.php" class="nav-link">Data Prodi</a>
+        <a href="Prodi.php" class="nav-link">Data Program Studi</a>
       </li>
     </ul>
 

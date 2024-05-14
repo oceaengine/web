@@ -1,8 +1,10 @@
 <?php
+  session_start();
   include 'Template/Header.php';
   include 'Template/Sidebar.php';
   include 'Template/Koneksi.php';  
-
+  ceklogin();
+  
   $query = "SELECT * FROM prodi";
   $hasil = mysqli_query($conn, $query);
 
